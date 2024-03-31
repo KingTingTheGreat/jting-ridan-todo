@@ -10,7 +10,7 @@ const VerifyPassword = async (inputPw: string) => {
 
 	console.log("inputPw: ", inputPw);
 
-	const success = await bcrypt.compare(inputPw, correctPassword);
+	const success = await bcrypt.compare(inputPw.toLowerCase(), correctPassword);
 	return success;
 };
 
