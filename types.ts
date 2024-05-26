@@ -6,3 +6,8 @@ export type Entry = {
 	updatedAt: string;
 	completed: boolean;
 };
+
+export type EntryInput = {
+	title: string;
+	description: string;
+};

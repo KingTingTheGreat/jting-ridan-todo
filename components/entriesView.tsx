@@ -4,19 +4,20 @@ import { Entry } from "@/types";
 import EntryCard from "@/components/entryCard";
 
 const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth: boolean }) => {
-	const [entries, setEntries] = useState<Entry[] | undefined>(undefined);
+	const [entries, setEntries] = useState<Entry[]>([]);
 
 	const authorize = async () => {
 		const myHeaders = new Headers();
 		myHeaders.append("Authorization", password);
 
-		fetch("/entries", {
+		fetch("/entries/all", {
 			method: "POST",
 			headers: myHeaders,
 			redirect: "follow",
 		})
 			.then((response) => response.json())
 			.then((result) => {
+				console.log(result[0]);
 				setEntries(result.entries);
 			})
 			.catch((error) => console.error(error));

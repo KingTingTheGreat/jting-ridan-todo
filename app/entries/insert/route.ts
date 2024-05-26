@@ -1,0 +1,43 @@
+import getCollection from "@/db";
+import { Collection } from "mongodb";
+import { NextResponse, NextRequest } from "next/server";
+import { Entry, EntryInput } from "@/types";
+import VerifyPassword from "@/utils/verifyPassword";
+import generateId from "@/utils/generateId";
+
+export const dynamic = "force-dynamic";
+
+let cachedCollection: Collection | null = null;
+
+export async function POST(req: NextRequest) {
+	const inputPw = req.headers.get("Authorization");
+
+	const success = await VerifyPassword(inputPw as string);
+
+	if (!success) {
+		return NextResponse.json({ entries: undefined }, { status: 401 });
+	}
+
+	// get entry from input
+	const entryInput: EntryInput = await req.json();
+
+	const entry: Entry = {
+		id: generateId(),
+		title: entryInput.title,
+		description: entryInput.description,
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString(),
+		completed: false,
+	};
+
+	console.log("adding entry to db");
+	console.log(entry);
+
+	if (!cachedCollection) {
+		cachedCollection = await getCollection("todo-items");
+	}
+
+	const entries = await cachedCollection.insertOne(entry);
+
+	return NextResponse.json(entries, { status: 200 });
+}
