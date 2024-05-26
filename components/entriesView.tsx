@@ -29,8 +29,12 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 		}
 	}, [password, attemptAuth]);
 
-	if (!entries) {
+	if (entries.length === 0 && attemptAuth) {
 		return <div>No entries available</div>;
+	}
+
+	if (!attemptAuth) {
+		return <></>;
 	}
 
 	return (
