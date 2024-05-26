@@ -43,5 +43,11 @@ export async function POST(req: NextRequest) {
 
 	const acknoledged = await cachedCollection.insertOne(entry);
 
-	return NextResponse.json(acknoledged, { status: 200 });
+	if (acknoledged.acknowledged) {
+		return NextResponse.json(entry, { status: 200 });
+	}
+
+	console.log("entry not added to db");
+
+	return NextResponse.json({ error: "Entry not added" }, { status: 500 });
 }

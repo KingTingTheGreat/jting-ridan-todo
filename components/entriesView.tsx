@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Entry } from "@/types";
 import EntryCard from "@/components/entryCard";
+import NewEntryCard from "./newEntryCard";
 
 const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth: boolean }) => {
 	const [entries, setEntries] = useState<Entry[]>([]);
@@ -39,6 +40,12 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 
 	return (
 		<div>
+			<NewEntryCard
+				password={password}
+				appendEntry={(entry: Entry) => {
+					setEntries([...entries, entry]);
+				}}
+			/>
 			{entries.map((entry) => (
 				<EntryCard key={entry.id} entryInitial={entry} password={password} />
 			))}
