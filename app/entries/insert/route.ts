@@ -21,6 +21,10 @@ export async function POST(req: NextRequest) {
 	// get entry from input
 	const entryInput: EntryInput = await req.json();
 
+	if (!entryInput.title || !entryInput.description) {
+		return NextResponse.json({ error: "Title and description are required" }, { status: 400 });
+	}
+
 	const entry: Entry = {
 		id: generateId(),
 		title: entryInput.title,
