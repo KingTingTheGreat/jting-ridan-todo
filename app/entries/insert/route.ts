@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 		cachedCollection = await getCollection("todo-items");
 	}
 
-	const entries = await cachedCollection.insertOne(entry);
+	const acknoledged = await cachedCollection.insertOne(entry);
 
-	return NextResponse.json(entries, { status: 200 });
+	return NextResponse.json(acknoledged, { status: 200 });
 }
