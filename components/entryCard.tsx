@@ -2,8 +2,28 @@
 import { useState } from "react";
 import { Entry } from "@/types";
 
-const EntryCard = ({ entry }: { entry: Entry }) => {
-	const [completed, setCompleted] = useState(entry.completed);
+const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: string }) => {
+	const [entry, setEntry] = useState(entryInitial);
+
+	const updateEntry = async () => {
+		const myHeaders = new Headers();
+		myHeaders.append("Authorization", password);
+
+		const res = await fetch("/entries/update", {
+			method: "POST",
+			headers: myHeaders,
+			body: JSON.stringify(entry),
+		});
+
+		const updatedEntry = await res.json();
+
+		setEntry(updatedEntry);
+	};
+
+	const toggleCompleted = async () => {
+		entry.completed = !entry.completed;
+		await updateEntry();
+	};
 
 	return (
 		<div className="m-2 p-2 rounded-xl border-black border-2">
@@ -11,16 +31,14 @@ const EntryCard = ({ entry }: { entry: Entry }) => {
 			<p>{entry.description}</p>
 			<p>Created at: {entry.createdAt}</p>
 			<p>Updated at: {entry.updatedAt}</p>
-			<p>Completed: {completed ? "Yes" : "No"}</p>
+			<p>Completed: {entry.completed ? "Yes" : "No"}</p>
 			<svg
-				onClick={() => {
-					setCompleted(!completed);
-				}}
+				onClick={toggleCompleted}
 				xmlns="http://www.w3.org/2000/svg"
 				width="40"
 				height="40"
 				viewBox="0 0 24 24"
-				fill={completed ? "lightgreen" : "none"}
+				fill={entry.completed ? "lightgreen" : "none"}
 				stroke="#000000"
 				strokeWidth="2"
 				strokeLinecap="round"

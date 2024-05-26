@@ -36,7 +36,7 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 	return (
 		<div>
 			{entries.map((entry) => (
-				<EntryCard key={entry.id} entry={entry} />
+				<EntryCard key={entry.id} entryInitial={entry} password={password} />
 			))}
 		</div>
 	);
