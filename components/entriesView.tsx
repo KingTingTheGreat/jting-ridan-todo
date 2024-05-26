@@ -31,7 +31,16 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 	}, [password, attemptAuth]);
 
 	if (entries.length === 0 && attemptAuth) {
-		return <div>No entries available</div>;
+		return (
+			<div>
+				<NewEntryCard
+					password={password}
+					appendEntry={(entry: Entry) => {
+						setEntries([...entries, entry]);
+					}}
+				/>
+			</div>
+		);
 	}
 
 	if (!attemptAuth) {
