@@ -14,8 +14,7 @@ const EntryCardEdit = ({ entry, updateEntry }: { entry: Entry; updateEntry: any 
 				required={true}
 				onChange={(e) => setEntryEdit({ ...entryEdit, title: e.target.value })}
 			/>
-			<input
-				type="text"
+			<textarea
 				value={entryEdit.description}
 				placeholder="Description"
 				required={true}

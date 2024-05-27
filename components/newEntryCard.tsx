@@ -32,8 +32,7 @@ const NewEntryCard = ({ password, appendEntry }: { password: string; appendEntry
 				required={true}
 				onChange={(e) => setEntry({ ...entry, title: e.target.value })}
 			/>
-			<input
-				type="text"
+			<textarea
 				value={entry.description}
 				placeholder="Description"
 				required={true}
