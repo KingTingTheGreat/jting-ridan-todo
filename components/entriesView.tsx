@@ -18,7 +18,6 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 		})
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result[0]);
 				setEntries(result.entries);
 			})
 			.catch((error) => console.error(error));
