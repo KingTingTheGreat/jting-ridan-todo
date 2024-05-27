@@ -11,7 +11,7 @@ const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: 
 		myHeaders.append("Authorization", password);
 
 		const res = await fetch("/entries/update", {
-			method: "POST",
+			method: "PUT",
 			headers: myHeaders,
 			body: JSON.stringify(entry),
 		});

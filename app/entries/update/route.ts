@@ -6,7 +6,7 @@ import VerifyPassword from "@/utils/verifyPassword";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(req: NextRequest) {
+export async function PUT(req: NextRequest) {
 	const inputPw = req.headers.get("Authorization");
 
 	const success = await VerifyPassword(inputPw as string);
