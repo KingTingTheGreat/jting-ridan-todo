@@ -7,8 +7,6 @@ import generateId from "@/utils/generateId";
 
 export const dynamic = "force-dynamic";
 
-let cachedCollection: Collection | null = null;
-
 export async function POST(req: NextRequest) {
 	const inputPw = req.headers.get("Authorization");
 
@@ -25,7 +23,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ error: "Title and description are required" }, { status: 400 });
 	}
 
-	const entry: Entry = {
+	const insertEntry: Entry = {
 		id: generateId(),
 		title: entryInput.title,
 		description: entryInput.description,
@@ -35,16 +33,23 @@ export async function POST(req: NextRequest) {
 	};
 
 	console.log("adding entry to db");
-	console.log(entry);
+	console.log(insertEntry);
 
-	if (!cachedCollection) {
-		cachedCollection = await getCollection("todo-items");
-	}
+	const collection: Collection = await getCollection("todo-items");
 
-	const acknoledged = await cachedCollection.insertOne(entry);
+	const acknoledged = await collection.insertOne(insertEntry);
+
+	const cleanEntry: Entry = {
+		id: insertEntry.id,
+		title: insertEntry.title,
+		description: insertEntry.description,
+		createdAt: insertEntry.createdAt,
+		updatedAt: insertEntry.updatedAt,
+		completed: insertEntry.completed,
+	};
 
 	if (acknoledged.acknowledged) {
-		return NextResponse.json(entry, { status: 200 });
+		return NextResponse.json(cleanEntry, { status: 200 });
 	}
 
 	console.log("entry not added to db");

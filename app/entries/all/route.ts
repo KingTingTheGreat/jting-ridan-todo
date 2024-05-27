@@ -6,8 +6,6 @@ import VerifyPassword from "@/utils/verifyPassword";
 
 export const dynamic = "force-dynamic";
 
-let cachedCollection: Collection | null = null;
-
 export async function POST(req: NextRequest) {
 	const inputPw = req.headers.get("Authorization");
 
@@ -17,11 +15,9 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ entries: undefined }, { status: 401 });
 	}
 
-	if (!cachedCollection) {
-		cachedCollection = await getCollection("todo-items");
-	}
+	const collection: Collection = await getCollection("todo-items");
 
-	const entries = await cachedCollection.find().toArray();
+	const entries = await collection.find().toArray();
 
 	const cleanEntries: Entry[] = entries.map((entry): Entry => {
 		return {

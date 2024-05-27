@@ -1,4 +1,5 @@
 import { MongoClient, Db, Collection } from "mongodb";
+import { CollectionCache } from "./types";
 
 const MONGO_URI = process.env.MONGO_URI;
 if (!MONGO_URI) {
@@ -11,6 +12,7 @@ if (!DB_NAME) {
 
 let client: MongoClient | null = null;
 let cachedDb: Db | null = null;
+const cachedCollections: CollectionCache = {};
 
 const connect = async (): Promise<Db> => {
 	if (!client) {
@@ -24,7 +26,10 @@ const getCollection = async (collectionName: string): Promise<Collection> => {
 	if (!cachedDb) {
 		cachedDb = await connect();
 	}
-	return cachedDb.collection(collectionName);
+	if (!cachedCollections[collectionName]) {
+		cachedCollections[collectionName] = cachedDb.collection(collectionName);
+	}
+	return cachedCollections[collectionName];
 };
 
 export default getCollection;
