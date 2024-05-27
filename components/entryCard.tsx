@@ -22,6 +22,7 @@ const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: 
 		// likely not necessary
 		const updatedEntry = await res.json();
 		setEntry(updatedEntry);
+		setEdit(false);
 	};
 
 	const toggleCompleted = async () => {
