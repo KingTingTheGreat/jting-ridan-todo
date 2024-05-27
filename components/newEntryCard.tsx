@@ -20,6 +20,7 @@ const NewEntryCard = ({ password, appendEntry }: { password: string; appendEntry
 
 		const newEntry = await res.json();
 		appendEntry(newEntry);
+		setEntry({ title: "", description: "" });
 	};
 
 	return (
