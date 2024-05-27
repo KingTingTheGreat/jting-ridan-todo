@@ -30,7 +30,5 @@ export async function POST(req: NextRequest) {
 		};
 	});
 
-	console.log(cleanEntries);
-
 	return NextResponse.json({ entries: cleanEntries }, { status: 200 });
 }
