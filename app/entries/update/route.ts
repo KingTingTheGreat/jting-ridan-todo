@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
 
 	// get entry from input
 	const entry: Entry = await req.json();
+	entry.updatedAt = new Date().toISOString();
 
 	const collection: Collection = await getCollection("todo-items");
 
