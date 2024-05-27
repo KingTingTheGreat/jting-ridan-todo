@@ -29,12 +29,14 @@ const NewEntryCard = ({ password, appendEntry }: { password: string; appendEntry
 				type="text"
 				value={entry.title}
 				placeholder="Title"
+				required={true}
 				onChange={(e) => setEntry({ ...entry, title: e.target.value })}
 			/>
 			<input
 				type="text"
 				value={entry.description}
 				placeholder="Description"
+				required={true}
 				onChange={(e) => setEntry({ ...entry, description: e.target.value })}
 			/>
 			<div className="flex justify-center">
