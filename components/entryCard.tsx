@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Entry } from "@/types";
+import formatDateString from "@/utils/formatDateString'";
 
 const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: string }) => {
 	const [entry, setEntry] = useState(entryInitial);
@@ -29,8 +30,8 @@ const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: 
 		<div className="m-2 p-2 rounded-xl border-black border-2 text-wrap min-w-80 max-w-80">
 			<h2>{entry.title}</h2>
 			<p>{entry.description}</p>
-			<p>Created at: {entry.createdAt}</p>
-			<p>Updated at: {entry.updatedAt}</p>
+			<p>Created: {formatDateString(entry.createdAt)}</p>
+			<p>Updated: {formatDateString(entry.updatedAt)}</p>
 			<p>Completed: {entry.completed ? "Yes" : "No"}</p>
 			<svg
 				onClick={toggleCompleted}
