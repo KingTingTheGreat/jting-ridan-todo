@@ -46,6 +46,21 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 		return <></>;
 	}
 
+	const removeEntry = async (entryDelete: Entry) => {
+		const myHeaders = new Headers();
+		myHeaders.append("Authorization", password);
+
+		const res = await fetch("/entries/delete", {
+			method: "DELETE",
+			headers: myHeaders,
+			body: JSON.stringify(entryDelete),
+		});
+
+		if (res.status === 200) {
+			setEntries(entries.filter((entry) => entry.id !== entryDelete.id));
+		}
+	};
+
 	return (
 		<div>
 			<NewEntryCard
@@ -55,7 +70,7 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 				}}
 			/>
 			{entries.map((entry) => (
-				<EntryCard key={entry.id} entryInitial={entry} password={password} />
+				<EntryCard key={entry.id} removeEntry={removeEntry} entryInitial={entry} password={password} />
 			))}
 		</div>
 	);

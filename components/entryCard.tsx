@@ -4,7 +4,15 @@ import { Entry } from "@/types";
 import EntryCardContent from "./entryCardContent";
 import EntryCardEdit from "./entryCardEdit";
 
-const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: string }) => {
+const EntryCard = ({
+	removeEntry,
+	entryInitial,
+	password,
+}: {
+	removeEntry: any;
+	entryInitial: Entry;
+	password: string;
+}) => {
 	const [entry, setEntry] = useState(entryInitial);
 	const [edit, setEdit] = useState(false);
 
@@ -37,7 +45,7 @@ const EntryCard = ({ entryInitial, password }: { entryInitial: Entry; password: 
 			{!edit ? (
 				<EntryCardContent entry={entry} toggleCompleted={toggleCompleted} />
 			) : (
-				<EntryCardEdit entry={entry} updateEntry={updateEntry} />
+				<EntryCardEdit entry={entry} updateEntry={updateEntry} removeEntry={removeEntry} />
 			)}
 		</div>
 	);

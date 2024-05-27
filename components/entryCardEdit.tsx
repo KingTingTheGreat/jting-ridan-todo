@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Entry } from "@/types";
 
-const EntryCardEdit = ({ entry, updateEntry }: { entry: Entry; updateEntry: any }) => {
+const EntryCardEdit = ({ entry, updateEntry, removeEntry }: { entry: Entry; updateEntry: any; removeEntry: any }) => {
 	const [entryEdit, setEntryEdit] = useState(entry);
 
 	return (
@@ -21,6 +21,7 @@ const EntryCardEdit = ({ entry, updateEntry }: { entry: Entry; updateEntry: any 
 				onChange={(e) => setEntryEdit({ ...entryEdit, description: e.target.value })}
 			/>
 			<button onClick={() => updateEntry(entryEdit)}>Update</button>
+			<button onClick={() => removeEntry(entry)}>Delete</button>
 		</div>
 	);
 };
