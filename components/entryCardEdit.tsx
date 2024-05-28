@@ -27,7 +27,7 @@ const EntryCardEdit = ({
 	return (
 		<>
 			{showDelete ? (
-				<div className="flex flex-col bg-[url('/favicon.ico')] bg-cover bg-center">
+				<div className="flex flex-col bg-[url('/ridatoni.jpg')] bg-cover bg-center">
 					<p>Are you sure you want to delete this entry?</p>
 					<button onClick={() => removeEntry(entry)} className="m-1 p-1 text-lg font-medium">
 						Yes
