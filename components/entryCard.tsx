@@ -16,6 +16,14 @@ const EntryCard = ({
 	const [entry, setEntry] = useState(entryInitial);
 	const [edit, setEdit] = useState(false);
 
+	const enterEdit = () => {
+		setEdit(true);
+	};
+
+	const exitEdit = () => {
+		setEdit(false);
+	};
+
 	const updateEntry = async (entry: Entry) => {
 		setEntry(entry);
 		const myHeaders = new Headers();
@@ -30,7 +38,7 @@ const EntryCard = ({
 		// likely not necessary
 		const updatedEntry = await res.json();
 		setEntry(updatedEntry);
-		setEdit(false);
+		exitEdit();
 	};
 
 	const toggleCompleted = async () => {
@@ -40,12 +48,10 @@ const EntryCard = ({
 
 	return (
 		<div className="m-2 p-2 rounded-xl border-black border-2 text-wrap min-w-80 max-w-80">
-			{!edit && <button onClick={() => setEdit(true)}>Edit</button>}
-			{edit && <button onClick={() => setEdit(false)}>Close</button>}
 			{!edit ? (
-				<EntryCardContent entry={entry} toggleCompleted={toggleCompleted} />
+				<EntryCardContent entry={entry} toggleCompleted={toggleCompleted} enterEdit={enterEdit} />
 			) : (
-				<EntryCardEdit entry={entry} updateEntry={updateEntry} removeEntry={removeEntry} />
+				<EntryCardEdit entry={entry} updateEntry={updateEntry} removeEntry={removeEntry} exitEdit={exitEdit} />
 			)}
 		</div>
 	);
