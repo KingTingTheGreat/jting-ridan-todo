@@ -23,28 +23,31 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<div className={`${authorized ? "hidden" : "visible"}`}>
-				<h1 className="text-4xl">Ridatoni</h1>
-				<input
-					className="border border-gray-300 p-2 rounded"
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button
-					onClick={() => authorize()}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-					Authorize
-				</button>
-			</div>
-
-			<div className={`text-2xl ${authorized ? "text-green-500" : "text-red-500"}`}>
-				{authorized ? "Authorized" : "Unauthorized"}
-			</div>
-
-			<EntriesView password={password} attemptAuth={authorized} />
+		<main className="flex min-h-screen flex-col items-center justify-center">
+			{authorized ? (
+				<>
+					<h1 className="text-5xl font-bold p-4 m-2 text-center">JTing RidaN Todo</h1>
+					<EntriesView password={password} attemptAuth={authorized} />
+				</>
+			) : (
+				<div className="flex flex-col items-center">
+					<div className="flex items-center">
+						<h1 className="text-4xl p-2">Ridatoni</h1>
+						<input
+							className="border border-gray-300 p-2 rounded text-lg w-40"
+							type="password"
+							placeholder="Password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<button
+						onClick={() => authorize()}
+						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded max-w-40">
+						Authorize
+					</button>
+				</div>
+			)}
 		</main>
 	);
 }
