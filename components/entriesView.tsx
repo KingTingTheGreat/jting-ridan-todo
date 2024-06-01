@@ -73,7 +73,7 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 			case SortBy.Complete:
 				setEntries(
 					[...entries].sort((a, b) => {
-						return b === a ? 0 : b ? -1 : 1;
+						return a.completed === b.completed ? 0 : a.completed ? -1 : 1;
 					})
 				);
 				break;
