@@ -27,7 +27,13 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 		})
 			.then((response) => response.json())
 			.then((result) => {
-				setEntries(result.entries);
+				setEntries(
+					result.entries.sort((a: Entry, b: Entry) => {
+						const dateA = new Date(a.updatedAt).getTime();
+						const dateB = new Date(b.updatedAt).getTime();
+						return dateB - dateA;
+					})
+				);
 			})
 			.catch((error) => console.error(error));
 	};
