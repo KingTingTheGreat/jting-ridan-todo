@@ -26,6 +26,7 @@ const NewEntryCard = ({ password, appendEntry }: { password: string; appendEntry
 	return (
 		<div className="m-2 p-2 rounded-xl flex flex-col border-black border-2 text-wrap min-w-80 max-w-80">
 			<input
+				className="p-2 bg-inherit"
 				type="text"
 				value={entry.title}
 				placeholder="Title"
@@ -33,6 +34,7 @@ const NewEntryCard = ({ password, appendEntry }: { password: string; appendEntry
 				onChange={(e) => setEntry({ ...entry, title: e.target.value })}
 			/>
 			<textarea
+				className="p-2 bg-inherit"
 				value={entry.description}
 				placeholder="Description"
 				required={true}
