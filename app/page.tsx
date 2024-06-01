@@ -23,14 +23,14 @@ export default function Home() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center">
+		<main className="flex min-h-screen flex-col items-center">
 			{authorized ? (
 				<>
 					<h1 className="text-5xl font-bold p-4 m-2 text-center">JTing RidaN Todo</h1>
 					<EntriesView password={password} attemptAuth={authorized} />
 				</>
 			) : (
-				<div className="flex flex-col items-center">
+				<div className="flex flex-col items-center justify-center min-h-screen">
 					<div className="flex items-center">
 						<h1 className="text-4xl p-2">Ridatoni</h1>
 						<input
