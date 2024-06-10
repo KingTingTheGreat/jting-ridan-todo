@@ -44,7 +44,7 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 		}
 	}, [password, attemptAuth]);
 
-	useEffect(() => {
+	const sortEntries = () => {
 		console.log(sortBy);
 		switch (sortBy) {
 			case SortBy.DateCreated:
@@ -78,6 +78,10 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 				);
 				break;
 		}
+	};
+
+	useEffect(() => {
+		sortEntries();
 	}, [sortBy, entries.length]);
 
 	if (!attemptAuth) {
@@ -157,7 +161,13 @@ const EntriesView = ({ password, attemptAuth }: { password: string; attemptAuth:
 			)}
 
 			{entries.map((entry) => (
-				<EntryCard key={entry.id} removeEntry={removeEntry} entryInitial={entry} password={password} />
+				<EntryCard
+					key={entry.id}
+					removeEntry={removeEntry}
+					entryInitial={entry}
+					password={password}
+					sortEntries={sortEntries}
+				/>
 			))}
 		</div>
 	);

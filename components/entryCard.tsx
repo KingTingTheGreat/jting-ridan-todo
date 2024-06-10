@@ -8,10 +8,12 @@ const EntryCard = ({
 	removeEntry,
 	entryInitial,
 	password,
+	sortEntries,
 }: {
 	removeEntry: any;
 	entryInitial: Entry;
 	password: string;
+	sortEntries: any;
 }) => {
 	const [entry, setEntry] = useState(entryInitial);
 	const [edit, setEdit] = useState(false);
@@ -39,6 +41,7 @@ const EntryCard = ({
 		const updatedEntry = await res.json();
 		setEntry(updatedEntry);
 		exitEdit();
+		sortEntries();
 	};
 
 	const toggleCompleted = async () => {
