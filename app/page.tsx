@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import EntriesView from "@/components/entriesView";
+import ridatoni from "@/public/ridatoni.svg";
+import chocoloney from "@/public/chocoloney.svg";
+import heart from "@/public/heart.svg";
+import Image from "next/image";
 
 export default function Home() {
 	const [password, setPassword] = useState("");
@@ -32,19 +36,23 @@ export default function Home() {
 			) : (
 				<div className="flex flex-col items-center justify-center min-h-screen">
 					<div className="flex items-center">
-						<h1 className="text-4xl p-2">Ridatoni</h1>
-						<input
-							className="border border-gray-300 p-2 rounded text-lg w-40"
-							type="password"
-							placeholder="Password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+						<div className="text-center p-10">
+							<Image src={ridatoni} alt="ridatoni" />
+							<h1 className="text-4xl m-8 p-2 border border-transparent border-4">Ridatoni</h1>
+						</div>
+						<div className="items-center text-center p-10">
+							<Image src={chocoloney} alt="chocoloney" />
+							<input
+								className="border border-transparent border-4 hover:border-dashed hover:border-gray-600 bg-transparent p-2 m-8 rounded text-4xl w-60"
+								// type="password"
+								// placeholder="Password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
 					</div>
-					<button
-						onClick={() => authorize()}
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded max-w-40">
-						Authorize
+					<button onClick={() => authorize()}>
+						<Image src={heart} alt="heart" />
 					</button>
 				</div>
 			)}
