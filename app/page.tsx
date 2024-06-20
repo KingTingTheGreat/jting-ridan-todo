@@ -43,7 +43,7 @@ export default function Home() {
 						<div className="items-center text-center p-10">
 							<Image src={chocoloney} alt="chocoloney" />
 							<input
-								className="border border-transparent border-4 hover:border-dashed hover:border-gray-600 bg-transparent p-2 m-8 rounded text-4xl w-60"
+								className="border border-transparent border-4 hover:border-dashed hover:border-gray-600 bg-transparent p-2 m-8 rounded text-4xl w-60 text-center"
 								// type="password"
 								// placeholder="Password"
 								value={password}
